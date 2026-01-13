@@ -1,0 +1,294 @@
+networks:
+  trim-default:
+    external: true
+    name: "trim-default"
+
+services:
+
+  check_website-chromium:
+
+    cap_drop:
+      - "AUDIT_CONTROL"
+      - "BLOCK_SUSPEND"
+      - "DAC_READ_SEARCH"
+      - "IPC_LOCK"
+      - "IPC_OWNER"
+      - "LEASE"
+      - "LINUX_IMMUTABLE"
+      - "MAC_ADMIN"
+      - "MAC_OVERRIDE"
+      - "NET_ADMIN"
+      - "NET_BROADCAST"
+      - "SYSLOG"
+      - "SYS_ADMIN"
+      - "SYS_BOOT"
+      - "SYS_MODULE"
+      - "SYS_NICE"
+      - "SYS_PACCT"
+      - "SYS_PTRACE"
+      - "SYS_RAWIO"
+      - "SYS_RESOURCE"
+      - "SYS_TIME"
+      - "SYS_TTY_CONFIG"
+      - "WAKE_ALARM"
+
+    command:
+      - "while true; do bash /app/server/check_website.sh;sleep 600;done;"
+
+    container_name: "check_website-chromium"
+
+    entrypoint:
+      - "bash"
+      - "-c"
+
+    environment:
+      - "APP_NAME=dpanel"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "APP_ENV=lite"
+      - "APP_VERSION=1.9.2"
+      - "APP_FAMILY=ce"
+      - "APP_SERVER_PORT=8080"
+      - "DOCKER_HOST=unix:///var/run/docker.sock"
+      - "STORAGE_LOCAL_PATH=/dpanel"
+      - "DB_DATABASE=/dpanel/dpanel.db"
+      - "TZ=Asia/Shanghai"
+      - "DP_ACME_CONFIG_HOME=/dpanel/acme"
+      - "DP_SYSTEM_STORAGE_LOCAL_PATH=/dpanel"
+      - "DP_DB_DATABASE=/dpanel/dpanel.db"
+
+    expose:
+      - "443/tcp"
+      - "80/tcp"
+      - "8080/tcp"
+
+    hostname: "63dad87a24e8"
+
+    image: "docker.cnb.cool/masx200/docker_mirror/dpanel-curl:latest"
+
+    ipc: "private"
+
+    logging:
+      driver: "json-file"
+      options: {}
+
+    networks:
+      - "trim-default"
+
+    privileged: true
+
+    security_opt:
+      - "label=disable"
+
+    stdin_open: true
+
+    tty: true
+
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "9edd58dd93b88ddaea83e69e00eb5cca4182aafc699adf0aacd23684f6d62c26:/dpanel"
+      - "E:\\docker-chromium-data-backup\\check_website.sh:/app/server/check_website.sh"
+
+    working_dir: "/app/server"
+
+  chromium:
+
+    container_name: "chromium"
+
+    entrypoint:
+      - "/init"
+
+    environment:
+      - "S6_STAGE2_HOOK=/docker-mods"
+      - "TITLE=Chromium"
+      - "PATH=/lsiopy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "PULSE_RUNTIME_PATH=/defaults"
+      - "TZ=Etc/UTC"
+      - "NVIDIA_DRIVER_CAPABILITIES=all"
+      - "HOME=/config"
+      - "DISPLAY=:1"
+      - "PASSWORD=********************************************************************************************************"
+      - "SUBFOLDER=/chromium/"
+      - "S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0"
+      - "S6_VERBOSITY=1"
+      - "LANG=en_US.UTF-8"
+      - "CUSTOM_USER=********************************************************************************************************"
+      - "PERL5LIB=/usr/local/bin"
+      - "VIRTUAL_ENV=/lsiopy"
+      - "LSIO_FIRST_PARTY=true"
+      - "CHROME_CLI=--proxy-server=http://chromium-http-proxy-go-server:57788 https://idx.google.com/********************************************************************************************************"
+      - "START_DOCKER=true"
+      - "PUID=0"
+      - "OMP_WAIT_POLICY=PASSIVE"
+      - "TERM=xterm"
+      - "LANGUAGE=en_US.UTF-8"
+      - "GOMP_SPINCOUNT=0"
+      - "LC_ALL=zh_CN.UTF-8"
+      - "PGID=0"
+      - "SELKIES_INTERPOSER=/usr/lib/selkies_joystick_interposer.so"
+      - "DISABLE_ZINK=false"
+      - "DISABLE_DRI3=false"
+
+    extra_hosts:
+      - "chromium-http-proxy-go-server:172.31.125.10"
+      - "chromium-http-proxy-go-server:fd12:5687:4425:5557::10"
+
+    hostname: "d9f2f11c9b2f"
+
+    image: "docker.cnb.cool/masx200/docker_mirror/linuxserver-chromium:latest-linux-amd64"
+
+    ipc: "private"
+
+    labels:
+      build_version: "Linuxserver.io version:- 85edbc44-ls80 Build-date:- 2024-07-31T09:27:44+00:00"
+      com.docker.compose.config-hash: "6071c99f73d677d360b8aff934472aecc88afa491eb7134abab8ec067638a559"
+      com.docker.compose.container-number: "1"
+      com.docker.compose.depends_on: "chromium-http-proxy-go-server:service_started:false"
+      com.docker.compose.image: "sha256:2bab72ab638e52283c3c578dc64d104d9ddcd297df73df5c4b017287b9e9a99e"
+      com.docker.compose.oneoff: "False"
+      com.docker.compose.project: "chromium-http-proxy-go-server"
+      com.docker.compose.project.config_files: "/data/compose/7/docker-compose.yml"
+      com.docker.compose.project.working_dir: "/data/compose/7"
+      com.docker.compose.replace: "chromium"
+      com.docker.compose.service: "chromium"
+      com.docker.compose.version: ""
+      com.kasmweb.image: "true"
+      maintainer: "thelamer"
+      org.opencontainers.image.authors: "linuxserver.io"
+      org.opencontainers.image.created: "2024-07-31T09:27:44+00:00"
+      org.opencontainers.image.description: "[Chromium](https://www.chromium.org/chromium-projects/) is\
+        \    an open-source browser project that aims to build a safer, faster, and more stable way for\
+        \ all    users to experience the web."
+      org.opencontainers.image.documentation: "https://docs.linuxserver.io/images/docker-chromium"
+      org.opencontainers.image.licenses: "GPL-3.0-only"
+      org.opencontainers.image.ref.name: "d3bfa2295656410097130f05186949c34a54ec2c"
+      org.opencontainers.image.revision: "d3bfa2295656410097130f05186949c34a54ec2c"
+      org.opencontainers.image.source: "https://github.com/linuxserver/docker-chromium"
+      org.opencontainers.image.title: "Chromium"
+      org.opencontainers.image.url: "https://github.com/linuxserver/docker-chromium/packages"
+      org.opencontainers.image.vendor: "linuxserver.io"
+      org.opencontainers.image.version: "85edbc44-ls80"
+
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
+
+    networks:
+      - "trim-default"
+
+    ports:
+      - "23000:3000/tcp"
+      - "23001:3001/tcp"
+
+    privileged: true
+
+    restart: "always"
+
+    security_opt:
+      - "seccomp:unconfined"
+      - "label=disable"
+
+    user: "0:0"
+
+    volumes:
+      - "e:/docker-chromium-data-backup/config:/config"
+      - "e:/docker-chromium-data-backup/wrapped-chromium:/usr/bin/wrapped-chromium"
+
+    working_dir: "/"
+
+  chromium-http-proxy-go-server:
+
+    command:
+      - "sh"
+      - "-c"
+      - "-x"
+      - "'./main'    '-dohurl' 'https://doh-server.masx200.ddns-ip.net' '-dohip' '104.21.14.41' '--dohalpn=h2'\
+        \    '-port' '57788'  '-dohalpn=h3'    '-dohurl' 'https://doh-server.masx200.ddns-ip.net' '--dohip=104.21.9.230'\
+        \   '-dohurl' 'https://deno-dns-over-https-server.g18uibxgnb.de5.net/' '-dohip' '104.21.9.230'\
+        \ '--dohalpn=h2'    '-dohurl' 'https://deno-dns-over-https-server.g18uibxgnb.de5.net/' '-dohip'\
+        \ '104.21.9.230' '--dohalpn=h2'    '-dohurl' 'https://deno-dns-over-https-server.g18uibxgnb.de5.net/'\
+        \ '-dohip' '104.21.9.230' '--dohalpn=h2'    '-dohurl' 'https://deno-dns-over-https-server.g18uibxgnb.de5.net/'\
+        \ '-dohip' '104.21.9.230' '--dohalpn=h3'    '-dohurl' 'https://deno-dns-over-https-server.g18uibxgnb.de5.net/'\
+        \ '-dohip' '104.21.9.230' '--dohalpn=h3'  -cache-file ./dns_cache.json -cache-aof-file dns_cache.aof\
+        \   '-upstream-address' 'http://192.168.31.245:58877' '-upstream-type' 'http'   -upstream-username=admin\
+        \ -upstream-password=******************************************************************************************************** --upstream-resolve-ips=true"
+
+    container_name: "chromium-http-proxy-go-server"
+
+    domainname: "chromium-http-proxy-go-server"
+
+    environment:
+      - "GOLANG_VERSION=1.24.4"
+      - "GOTOOLCHAIN=local"
+      - "GOPATH=/go"
+      - "TZ=Asia/Shanghai"
+      - "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+    extra_hosts:
+      - "chromium:172.31.125.20"
+      - "chromium:fd12:5687:4425:5557::20"
+
+    hostname: "8624dc3477fe"
+
+    image: "docker.gh-proxy.com/ghcr.io/masx200/http-proxy-go-server:20260109031050-main-9a8ebda"
+
+    ipc: "private"
+
+    labels:
+      com.docker.compose.config-hash: "1e3ace6e8989b4c72ed992f5ca6585137f965c5d653624a66523d88d0337ec47"
+      com.docker.compose.container-number: "1"
+      com.docker.compose.depends_on: ""
+      com.docker.compose.image: "sha256:c100e31231bbe53d2eebf7497914b68f5ab37a814822fbe2d7d414d7eee28d3c"
+      com.docker.compose.oneoff: "False"
+      com.docker.compose.project: "chromium-http-proxy-go-server"
+      com.docker.compose.project.config_files: "/data/compose/7/docker-compose.yml"
+      com.docker.compose.project.working_dir: "/data/compose/7"
+      com.docker.compose.service: "chromium-http-proxy-go-server"
+      com.docker.compose.version: ""
+      createdBy: "Apps"
+      org.opencontainers.image.created: "20260109031050"
+      org.opencontainers.image.description: "A feature-rich HTTP/HTTPS proxy server with DNS caching and\
+        \ AOF persistence"
+      org.opencontainers.image.licenses: "MIT"
+      org.opencontainers.image.revision: "9a8ebda75fbd93aab6b75c958dbb03cba10657c0"
+      org.opencontainers.image.source: "https://github.com/masx200/http-proxy-go-server"
+      org.opencontainers.image.title: "http-proxy-go-server"
+      org.opencontainers.image.url: "https://github.com/masx200/http-proxy-go-server"
+      org.opencontainers.image.version: "9a8ebda"
+
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
+
+    networks:
+      - "trim-default"
+
+    ports:
+      - "57788:57788/tcp"
+      - "58877:58877/tcp"
+
+    privileged: true
+
+    restart: "always"
+
+    security_opt:
+      - "label=disable"
+
+    stdin_open: true
+
+    tty: true
+
+    volumes:
+      - "e:/docker/http-proxy-go-server/dns_cache.aof:/app/dns_cache.aof"
+      - "e:/docker/http-proxy-go-server/dns_cache.json:/app/dns_cache.json"
+
+    working_dir: "/app"
+
+version: "3.6"
+
+volumes:
+  9edd58dd93b88ddaea83e69e00eb5cca4182aafc699adf0aacd23684f6d62c26:
+    external: true
