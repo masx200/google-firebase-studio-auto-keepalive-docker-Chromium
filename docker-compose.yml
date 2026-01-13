@@ -6,6 +6,7 @@ networks:
 services:
 
   check_website-chromium:
+    restart: "always"
 
     cap_drop:
       - "AUDIT_CONTROL"
