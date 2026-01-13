@@ -113,7 +113,7 @@ volumes:
 
 
 # ===================== 可自定义配置区（修改这里即可）=====================
-MONITOR_URL="https://2053-firebase-node-express-web-ts-1767709386194.cluster-czg6tuqjtffiaszlkqfihyc3dq.cloudworkstations.dev/"
+MONITOR_URL="https://********************************************************************************************************/"
 # 需要监测的目标网站地址
 RETRY_TIMES=4
 # 重试次数（固定4次，按需求）

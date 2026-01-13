@@ -1,13 +1,13 @@
 帐号
 
 ```plain
-m8dkatnya1zst1n
+***************
 ```
 
 密码
 
 ```plain
-m8dkatnya1zst1n
+***************
 ```
 
 ```yaml
@@ -36,14 +36,14 @@ services:
       - "/init"
 
     environment:
-      - "CUSTOM_USER=m8dkatnya1zst1n"
-      - "PASSWORD=m8dkatnya1zst1n"
+      - "CUSTOM_USER=***************"
+      - "PASSWORD=***************"
       - "PUID=0"
       - "PGID=0"
       - "TZ=Etc/UTC"
       - "SUBFOLDER=/chromium/"
       - "LC_ALL=zh_CN.UTF-8"
-      - "CHROME_CLI=--proxy-server=http://chromium-http-proxy-go-server:57788 https://idx.google.com/node-express-web-ts-31822042"
+      - "CHROME_CLI=--proxy-server=http://chromium-http-proxy-go-server:57788 https://idx.google.com/****************************"
       - "PATH=/lsiopy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
       - "HOME=/config"
       - "LANGUAGE=en_US.UTF-8"
@@ -151,7 +151,7 @@ services:
       - "sh"
       - "-c"
       - "-x"
-      - "'./main'    '-dohurl' 'https://doh-server.masx200.ddns-ip.net' '-dohip' '104.21.14.41' '--dohalpn=h2'    '-port' '57788'  '-dohalpn=h3'    '-dohurl' 'https://doh-server.masx200.ddns-ip.net' '--dohip=104.21.9.230'   '-dohurl' 'https://deno-dns-over-https-server.g18uibxgnb.de5.net/' '-dohip' '104.21.9.230' '--dohalpn=h2'    '-dohurl' 'https://deno-dns-over-https-server.g18uibxgnb.de5.net/' '-dohip' '104.21.9.230' '--dohalpn=h2'    '-dohurl' 'https://deno-dns-over-https-server.g18uibxgnb.de5.net/' '-dohip' '104.21.9.230' '--dohalpn=h2'    '-dohurl' 'https://deno-dns-over-https-server.g18uibxgnb.de5.net/' '-dohip' '104.21.9.230' '--dohalpn=h3'    '-dohurl' 'https://deno-dns-over-https-server.g18uibxgnb.de5.net/' '-dohip' '104.21.9.230' '--dohalpn=h3'  -cache-file ./dns_cache.json -cache-aof-file dns_cache.aof   '-upstream-address' 'http://192.168.31.245:58877' '-upstream-type' 'http'   -upstream-username=admin -upstream-password=933cgaxekq5vnz6shebzc --upstream-resolve-ips=true"
+      - "'./main'    '-dohurl' 'https://doh-server.masx200.ddns-ip.net' '-dohip' '104.21.14.41' '--dohalpn=h2'    '-port' '57788'  '-dohalpn=h3'    '-dohurl' 'https://doh-server.masx200.ddns-ip.net' '--dohip=104.21.9.230'   '-dohurl' 'https://deno-dns-over-https-server.g18uibxgnb.de5.net/' '-dohip' '104.21.9.230' '--dohalpn=h2'    '-dohurl' 'https://deno-dns-over-https-server.g18uibxgnb.de5.net/' '-dohip' '104.21.9.230' '--dohalpn=h2'    '-dohurl' 'https://deno-dns-over-https-server.g18uibxgnb.de5.net/' '-dohip' '104.21.9.230' '--dohalpn=h2'    '-dohurl' 'https://deno-dns-over-https-server.g18uibxgnb.de5.net/' '-dohip' '104.21.9.230' '--dohalpn=h3'    '-dohurl' 'https://deno-dns-over-https-server.g18uibxgnb.de5.net/' '-dohip' '104.21.9.230' '--dohalpn=h3'  -cache-file ./dns_cache.json -cache-aof-file dns_cache.aof   '-upstream-address' 'http://192.168.31.245:58877' '-upstream-type' 'http'   -upstream-username=admin -upstream-password=********************* --upstream-resolve-ips=true"
 
     container_name: "chromium-http-proxy-go-server"
 
@@ -189,7 +189,7 @@ version: "3.6"
 ```
 
 ```plain
-https://m8dkatnya1zst1n:m8dkatnya1zst1n@127.0.0.1:23001/chromium/
+https://***************:***************@127.0.0.1:23001/chromium/
 ```
 
 ```bash
@@ -234,7 +234,7 @@ Auto Refresh Plus
     "InstallDate": 1767841307884,
     "clientId": "d85320a9-69a7-418a-82b8-6e37bdc52b6f",
     "domain_config": {
-      "https://idx.google.com/node-express-web-ts-31822042": {
+      "https://idx.google.com/****************************": {
         "autoclick": "",
         "checkme": "",
         "countdownTime": 600000,
@@ -269,7 +269,7 @@ Auto Refresh Plus
     "options": {
       "asrefresh": true,
       "asrestart": true,
-      "asurl": "https://idx.google.com/node-express-web-ts-31822042",
+      "asurl": "https://idx.google.com/****************************",
       "autostart": true,
       "clickInteraction": false,
       "default_time": 12,

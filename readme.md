@@ -52,7 +52,7 @@
 
 如果页面接受普通刷新即可保持会话，最简单的做法是使用浏览器扩展（例如 Auto Refresh Plus）。
 
-在你的仓库里已经有 Auto Refresh Plus 的设置备份，示例配置显示针对 `https://idx.google.com/node-express-web-ts-31822042` 设置了 10 分钟刷新（timerMinute:10），并开启了随机时间（random_time: true）。可以直接在扩展中导入该设置并启用。 
+在你的仓库里已经有 Auto Refresh Plus 的设置备份，示例配置显示针对 `https://idx.google.com/****************************` 设置了 10 分钟刷新（timerMinute:10），并开启了随机时间（random_time: true）。可以直接在扩展中导入该设置并启用。 
 
 优点：直接在运行的 Chromium 中安装扩展即可生效（你的容器环境里也在用类似方式启动 Chromium）。
 缺点：若站点需要模拟点击、或刷新有防护机制、或刷新会使你被频繁登出，则扩展无法覆盖所有场景。
@@ -78,7 +78,7 @@
 // keepalive.js
 const puppeteer = require('puppeteer');
 
-const TARGET_URL = 'https://idx.google.com/node-express-web-ts-31822042';
+const TARGET_URL = 'https://idx.google.com/****************************';
 const INTERVAL_MS = 5 * 60 * 1000; // 5分钟一次，按需调整
 
 (async () => {
@@ -144,7 +144,7 @@ const INTERVAL_MS = 5 * 60 * 1000; // 5分钟一次，按需调整
 
 ```bash
 # check_website.sh (简化)
-MONITOR_URL="https://idx.google.com/node-express-web-ts-31822042"
+MONITOR_URL="https://idx.google.com/****************************"
 HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 15 "$MONITOR_URL")
 if [ "$HTTP_STATUS" == "200" ]; then
   echo "$(date) OK $HTTP_STATUS"
@@ -188,7 +188,7 @@ services:
     command: ["node", "keepalive.js"]
     restart: always
     environment:
-      - TARGET_URL=https://idx.google.com/node-express-web-ts-31822042
+      - TARGET_URL=https://idx.google.com/****************************
 
   check_website-chromium:
     image: your-checker-image
